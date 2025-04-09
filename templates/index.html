@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM AutoValidator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>LLM AutoValidator</h1>
+        <div class="upload-section">
+            <input type="file" id="fileInput" accept=".xlsx" />
+            <button onclick="loadFile()">Загрузить</button>
+        </div>
+        <div class="table-container">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>LLM Answer</th>
+                        <th>Gold Answer</th>
+                        <th>Info</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+        <div class="metrics">
+            <p id="progress" style="display: none;">Прогресс: <span id="progressValue">0%</span></p>
+            <p id="accuracyLabel" style="display: none;">Accuracy: <span id="accuracy">0%</span></p>
+            <button onclick="downloadFile()" id="downloadBtn" disabled>Скачать результат</button>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
