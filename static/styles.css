@@ -30,10 +30,21 @@ h1 {
     margin-bottom: 20px;
 }
 
-input[type="file"] {
-    padding: 8px;
-    border: 1px solid #ddd;
+.upload-btn {
+    padding: 8px 16px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.upload-btn:hover {
+    background-color: #357abd;
 }
 
 button {
@@ -63,12 +74,17 @@ table {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
+    table-layout: fixed; /* Фиксированная ширина колонок */
 }
 
 th, td {
     padding: 10px;
     text-align: left;
     border: 1px solid #ddd;
+    width: 20%; /* Каждая колонка занимает 20% ширины таблицы */
+    white-space: normal; /* Перенос текста на новую строку */
+    overflow-wrap: break-word; /* Перенос длинных слов */
+    word-wrap: break-word; /* Для совместимости со старыми браузерами */
 }
 
 th {
@@ -94,22 +110,46 @@ tr.incorrect {
     color: #333;
 }
 
-#progress {
-    font-size: 16px;
-    color: #4a90e2; /* Основной синий цвет */
-    font-weight: bold;
-    background-color: #e8f0fe; /* Светло-синий фон */
-    padding: 8px 12px;
+.progress-container {
+    position: relative;
+    width: 300px;
+    height: 30px;
+    background-color: #e8f0fe;
     border-radius: 5px;
-    display: inline-block;
+    overflow: hidden;
+    margin: 0 auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #1a73e8;
+    transition: width 0.3s ease-in-out;
+}
+
 #progressValue {
-    color: #1a73e8; /* Более насыщенный синий для значения */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 #accuracy {
     font-weight: bold;
     color: #4a90e2;
 }
+
+#downloadBtn {
+    margin-top: 20px;
+}
+
+th:nth-child(1), td:nth-child(1) { width: 20%; } /* Question */
+th:nth-child(2), td:nth-child(2) { width: 20%; } /* LLM Answer */
+th:nth-child(3), td:nth-child(3) { width: 20%; } /* Gold Answer */
+th:nth-child(4), td:nth-child(4) { width: 30%; } /* Info */
+th:nth-child(5), td:nth-child(5) { width: 10%; } /* Result */

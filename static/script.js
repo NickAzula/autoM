@@ -29,13 +29,13 @@ function loadFile() {
 
 function startStreaming() {
     const tableBody = document.getElementById('tableBody');
-    tableBody.innerHTML = ''; // Очищаем "Загрузка..."
+    tableBody.innerHTML = '';
     const progressElement = document.getElementById('progress');
+    const progressBar = document.getElementById('progressBar');
     const progressValue = document.getElementById('progressValue');
     const accuracyLabel = document.getElementById('accuracyLabel');
     const accuracyValue = document.getElementById('accuracy');
 
-    // Показываем прогресс, скрываем accuracy
     progressElement.style.display = 'block';
     accuracyLabel.style.display = 'none';
 
@@ -58,17 +58,18 @@ function startStreaming() {
 
     source.addEventListener('progress', function(event) {
         const progressData = JSON.parse(event.data);
-        progressValue.textContent = `${progressData.progress.toFixed(2)}%`;
+        const progressPercent = progressData.progress.toFixed(2);
+        progressValue.textContent = `Прогресс: ${progressPercent}%`;
+        progressBar.style.width = `${progressPercent}%`; // Обновляем ширину прогресс-бара
     });
 
     source.addEventListener('complete', function(event) {
         const completeData = JSON.parse(event.data);
-        // Скрываем прогресс, показываем accuracy
         progressElement.style.display = 'none';
         accuracyLabel.style.display = 'block';
         updateMetrics(completeData.accuracy);
         document.getElementById('downloadBtn').disabled = false;
-        source.close(); // Закрываем поток
+        source.close();
     });
 
     source.onerror = function() {
